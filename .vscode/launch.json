@@ -1,0 +1,19 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug hello.py",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/src/cyclebot/hello.py",
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}",
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}/src"
+            },
+            "python": "${workspaceFolder}/.venv/bin/python",
+            "justMyCode": true,
+            "stopOnEntry": false
+        }
+    ]
+}
