@@ -23,6 +23,7 @@ classifiers = [
 dependencies = [
     "requests",
     "pydantic>=2.0.0",
+    "claude-code-sdk",
 ]
 
 [tool.setuptools.packages.find]
@@ -130,6 +131,7 @@ omit = [
     "*/.venv/*",
     "*/build/*",
     "*/dist/*",
+    "src/cyclebot/hello.py",  # Demo script, no tests needed
 ]
 
 [tool.coverage.report]
@@ -167,6 +169,14 @@ warn_unreachable = false
 strict_equality = true
 show_error_codes = true
 explicit_package_bases = true
+follow_imports = "skip"
+ignore_missing_imports = true
+exclude = [
+    ".venv/",
+    "venv/",
+    "build/",
+    "dist/"
+]
 
 [[tool.mypy.overrides]]
 module = "tests.*"

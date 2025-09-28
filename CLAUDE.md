@@ -67,9 +67,9 @@ cyclebot/
 ## Contributing Guidelines
 
 1. All code must pass linting and formatting checks
-2. Tests must maintain 80% minimum coverage
-3. Use descriptive commit messages
-4. Follow existing code patterns and conventions
+1. Tests must maintain 80% minimum coverage
+1. Use descriptive commit messages
+1. Follow existing code patterns and conventions
 
 ## Author
 
