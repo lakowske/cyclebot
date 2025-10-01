@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CycleBot - Web Interface</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #1e1e1e;
+            color: #d4d4d4;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background: #2d2d30;
+            padding: 1rem 2rem;
+            border-bottom: 1px solid #3e3e42;
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 1rem 2rem;
+            overflow: hidden;
+        }
+
+        .status {
+            padding: 0.5rem;
+            margin-bottom: 1rem;
+            border-radius: 4px;
+            font-size: 0.875rem;
+        }
+
+        .status.connected {
+            background: #1e3a1e;
+            color: #4ec9b0;
+            border: 1px solid #4ec9b0;
+        }
+
+        .status.disconnected {
+            background: #3a1e1e;
+            color: #f48771;
+            border: 1px solid #f48771;
+        }
+
+        .status.connecting {
+            background: #3a3a1e;
+            color: #dcdcaa;
+            border: 1px solid #dcdcaa;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🤖 CycleBot</h1>
+    </header>
+
+    <main>
+        <div class="container">
+            <div id="status" class="status connecting">Connecting...</div>
+            <chat-log id="chatLog"></chat-log>
+            <prompt-input id="promptInput"></prompt-input>
+        </div>
+    </main>
+
+    <script src="/static/components/chat-log.js" type="module"></script>
+    <script src="/static/components/prompt-input.js" type="module"></script>
+    <script src="/static/app.js" type="module"></script>
+</body>
+</html>

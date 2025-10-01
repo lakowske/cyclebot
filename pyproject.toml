@@ -24,6 +24,9 @@ dependencies = [
     "requests",
     "pydantic>=2.0.0",
     "claude-code-sdk",
+    "fastapi>=0.104.0",
+    "uvicorn[standard]>=0.24.0",
+    "websockets>=12.0",
 ]
 
 [tool.setuptools.packages.find]
@@ -115,6 +118,8 @@ convention = "google"
 "setup_new_project.py" = ["T201", "S603", "S607", "PTH201", "SIM114", "RET505", "SIM108"]  # Allow print statements and subprocess calls in setup script
 "src/cyclebot/actions/build.py" = ["PTH110", "PTH103"]  # Allow os.path usage in build script
 "src/cyclebot/core.py" = ["EM101"]  # Allow string literals in exceptions for demo code
+"src/cyclebot/hello.py" = ["T201"]  # Allow print statements in demo script
+"src/cyclebot/web.py" = ["T201"]  # Allow print statements in web server
 "test_integration.py" = ["S603"]  # Allow subprocess calls in integration test
 
 [tool.ruff.lint.isort]
@@ -132,6 +137,7 @@ omit = [
     "*/build/*",
     "*/dist/*",
     "src/cyclebot/hello.py",  # Demo script, no tests needed
+    "src/cyclebot/web.py",  # Web server, no tests needed
 ]
 
 [tool.coverage.report]
