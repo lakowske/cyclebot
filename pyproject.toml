@@ -28,6 +28,7 @@ dependencies = [
     "uvicorn[standard]>=0.24.0",
     "websockets>=12.0",
     "playwright>=1.40.0",
+    "python-dotenv>=1.0.0",
 ]
 
 [tool.setuptools.packages.find]
@@ -122,6 +123,8 @@ convention = "google"
 "src/cyclebot/hello.py" = ["T201"]  # Allow print statements in demo script
 "src/cyclebot/web.py" = ["T201"]  # Allow print statements in web server
 "src/cyclebot/chart_capture.py" = ["T201"]  # Allow print statements in standalone script
+"src/cyclebot/chart.py" = ["T201"]  # Allow print statements in utility module
+"src/cyclebot/openrouter_hello.py" = ["T201"]  # Allow print statements in demo script
 "test_integration.py" = ["S603"]  # Allow subprocess calls in integration test
 
 [tool.ruff.lint.isort]
@@ -141,6 +144,8 @@ omit = [
     "src/cyclebot/hello.py",  # Demo script, no tests needed
     "src/cyclebot/web.py",  # Web server, no tests needed
     "src/cyclebot/chart_capture.py",  # Standalone script, no tests needed
+    "src/cyclebot/chart.py",  # Utility module, tested via integration
+    "src/cyclebot/openrouter_hello.py",  # Demo script, no tests needed
 ]
 
 [tool.coverage.report]

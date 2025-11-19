@@ -6,10 +6,11 @@ instead of going through the Claude Code SDK and MCP server.
 """
 
 import asyncio
-from datetime import datetime, timezone
 from pathlib import Path
 
 from playwright.async_api import Page, async_playwright
+
+from cyclebot.chart import get_chart_directory, get_chart_filename, get_chart_timestamp
 
 
 async def capture_chart(page: Page, url: str, output_path: str, wait_time: int = 3000) -> None:
@@ -43,18 +44,9 @@ async def main() -> None:
     # Profile directory (same as used by hello.py)
     profile_dir = Path.home() / ".config" / "cyclebot" / "chrome-profile-tradingview"
 
-    # Create timestamped directory structure: ~/mnt/pi-share/Trading/charts/{YEAR}/{Month}/{YYYY-MM-DD}/
-    now = datetime.now(timezone.utc).astimezone()  # Get local time with timezone awareness
-    base_dir = Path.home() / "mnt" / "pi-share" / "Trading" / "charts"
-    year_dir = base_dir / str(now.year)
-    month_dir = year_dir / now.strftime("%b")  # e.g., "Nov"
-    date_dir = month_dir / now.strftime("%Y-%m-%d")  # e.g., "2025-11-19"
-
-    # Create directory structure
-    date_dir.mkdir(parents=True, exist_ok=True)
-
-    # Create timestamp for filenames
-    timestamp = now.strftime("%Y-%m-%d_%H-%M-%S")  # e.g., "2025-11-19_15-30-45"
+    # Get chart directory and timestamp using common module
+    date_dir = get_chart_directory()
+    timestamp = get_chart_timestamp()
 
     # Chart definitions: (URL, timeframe_suffix)
     charts = [
@@ -89,8 +81,8 @@ async def main() -> None:
 
         # Capture all charts using the same browser session
         for url, timeframe in charts:
-            # Create filename: {timestamp}-{timeframe}.png
-            filename = f"{timestamp}-{timeframe}.png"
+            # Create filename using common module
+            filename = get_chart_filename(timeframe, timestamp)
             output_path = date_dir / filename
             await capture_chart(page, url, str(output_path))
 
