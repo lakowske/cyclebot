@@ -27,6 +27,7 @@ dependencies = [
     "fastapi>=0.104.0",
     "uvicorn[standard]>=0.24.0",
     "websockets>=12.0",
+    "playwright>=1.40.0",
 ]
 
 [tool.setuptools.packages.find]
@@ -120,6 +121,7 @@ convention = "google"
 "src/cyclebot/core.py" = ["EM101"]  # Allow string literals in exceptions for demo code
 "src/cyclebot/hello.py" = ["T201"]  # Allow print statements in demo script
 "src/cyclebot/web.py" = ["T201"]  # Allow print statements in web server
+"src/cyclebot/chart_capture.py" = ["T201"]  # Allow print statements in standalone script
 "test_integration.py" = ["S603"]  # Allow subprocess calls in integration test
 
 [tool.ruff.lint.isort]
@@ -138,6 +140,7 @@ omit = [
     "*/dist/*",
     "src/cyclebot/hello.py",  # Demo script, no tests needed
     "src/cyclebot/web.py",  # Web server, no tests needed
+    "src/cyclebot/chart_capture.py",  # Standalone script, no tests needed
 ]
 
 [tool.coverage.report]

@@ -179,3 +179,9 @@ tmp/*
 
 # Ruff cache
 .ruff_cache/
+
+# Screenshot output directory
+screenshots/
+
+# Playwright MCP temporary files
+.playwright-mcp/
