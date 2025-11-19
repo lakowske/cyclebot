@@ -2,9 +2,8 @@
 
 import json
 from pathlib import Path
-from typing import Any
+from typing import Any, Optional, Union
 
-import anyio
 from claude_code_sdk import (
     AssistantMessage,
     ClaudeCodeOptions,
@@ -27,17 +26,17 @@ class JSONRPCRequest(BaseModel):
 
     jsonrpc: str = "2.0"
     method: str
-    params: dict[str, Any] | None = None
-    id: int | str | None = None
+    params: Optional[dict[str, Any]] = None
+    id: Optional[Union[int, str]] = None
 
 
 class JSONRPCResponse(BaseModel):
     """JSON-RPC 2.0 response model."""
 
     jsonrpc: str = "2.0"
-    result: Any | None = None
-    error: dict[str, Any] | None = None
-    id: int | str | None = None
+    result: Optional[Any] = None
+    error: Optional[dict[str, Any]] = None
+    id: Optional[Union[int, str]] = None
 
 
 app = FastAPI(title="CycleBot Web Interface")
@@ -49,15 +48,15 @@ STATIC_DIR = Path(__file__).parent / "static"
 app.mount("/static", StaticFiles(directory=str(STATIC_DIR)), name="static")
 
 
-@app.get("/", response_class=HTMLResponse)
+@app.get("/", response_class=HTMLResponse)  # type: ignore[misc]
 async def get_index() -> str:
     """Serve the main HTML page."""
     index_path = STATIC_DIR / "index.html"
-    with open(index_path) as f:
+    with index_path.open() as f:
         return f.read()
 
 
-@app.websocket("/ws")
+@app.websocket("/ws")  # type: ignore[misc]
 async def websocket_endpoint(websocket: WebSocket) -> None:
     """WebSocket endpoint for JSON-RPC communication."""
     await websocket.accept()
@@ -207,7 +206,7 @@ def main() -> None:
     """Run the FastAPI server."""
     import uvicorn
 
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(app, host="0.0.0.0", port=8000)  # noqa: S104
 
 
 if __name__ == "__main__":

@@ -18,27 +18,31 @@ A web-based interface for interacting with Claude Code SDK through FastAPI and W
 ## Quick Start
 
 1. Install dependencies (if not already done):
+
    ```bash
    uv pip install -e ".[dev]"
    ```
 
-2. Start the web server:
+1. Start the web server:
+
    ```bash
    python -m cyclebot.web
    ```
 
-3. Open your browser to: http://localhost:8000
+1. Open your browser to: http://localhost:8000
 
-4. Enter a prompt and click "Run" (or press Ctrl+Enter / Cmd+Enter)
+1. Enter a prompt and click "Run" (or press Ctrl+Enter / Cmd+Enter)
 
 ## Architecture
 
 ### Backend (FastAPI + WebSocket)
+
 - **`src/cyclebot/web.py`**: FastAPI server with WebSocket endpoint
 - Streams messages from Claude Code SDK to browser in real-time
 - Implements JSON-RPC 2.0 protocol for request/response handling
 
 ### Frontend (Web Components)
+
 - **`src/cyclebot/static/index.html`**: Main HTML page
 - **`src/cyclebot/static/app.js`**: WebSocket client and JSON-RPC handler
 - **`src/cyclebot/static/components/chat-log.js`**: Message display component
@@ -49,6 +53,7 @@ A web-based interface for interacting with Claude Code SDK through FastAPI and W
 Uses JSON-RPC 2.0 over WebSockets:
 
 **Request (client → server)**:
+
 ```json
 {
   "jsonrpc": "2.0",
@@ -65,6 +70,7 @@ Uses JSON-RPC 2.0 over WebSockets:
 ```
 
 **Notifications (server → client)** - streamed during execution:
+
 ```json
 {
   "jsonrpc": "2.0",
@@ -82,6 +88,7 @@ Uses JSON-RPC 2.0 over WebSockets:
 ```
 
 **Response (server → client)** - when completed:
+
 ```json
 {
   "jsonrpc": "2.0",
@@ -122,9 +129,10 @@ The web interface uses plain web components (no build step required):
 - Reload browser to see changes
 
 To add new message types:
+
 1. Update `handle_prompt()` in `web.py` to emit the new type
-2. Add rendering logic in `chat-log.js` `renderMessage()` method
-3. Add color scheme in chat-log component styles
+1. Add rendering logic in `chat-log.js` `renderMessage()` method
+1. Add color scheme in chat-log component styles
 
 ## Running in Production
 
@@ -135,6 +143,7 @@ uvicorn cyclebot.web:app --host 0.0.0.0 --port 8000 --workers 4
 ```
 
 Consider:
+
 - Using a reverse proxy (nginx, Caddy)
 - Enabling HTTPS/WSS
 - Adding authentication
